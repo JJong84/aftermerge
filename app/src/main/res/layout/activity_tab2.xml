@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <GridView
+        android:id="@+id/galleryGridView"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:columnWidth="280dp"
+        android:gravity="center"
+        android:horizontalSpacing="2dp"
+        android:numColumns="3"
+        android:padding="2dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="2dp" >
+    </GridView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <ListView
+            android:id="@+id/galleryListView"
+            android:orientation="horizontal"
+            android:layout_margin="20dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+            <Button
+                android:id="@+id/fullViewButton"
+                android:text="FULL VIEW"
+                style="@style/tap2Button"/>
+            <Button
+                android:id="@+id/camButton"
+                android:text="TAKE NEW"
+                style="@style/tap2Button"/>
+            <Button
+                android:id="@+id/shareButton"
+                android:text="DELETE"
+                style="@style/tap2Button"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

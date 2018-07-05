@@ -1,0 +1,7 @@
+<resources>
+    <string name="rf">Remove from favorites...</string>
+    <string name="af">Add to favorites...</string>
+    <string name="app_name">week1_2</string>
+    <string name="defaults">defaults</string>
+    <string name="Ok">Ok</string>
+</resources>
