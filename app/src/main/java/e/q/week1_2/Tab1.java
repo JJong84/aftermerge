@@ -10,7 +10,6 @@ import android.database.Cursor;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.icu.text.Collator;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.os.Bundle;
@@ -39,10 +38,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
