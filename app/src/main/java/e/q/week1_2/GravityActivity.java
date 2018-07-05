@@ -119,7 +119,7 @@ public class GravityActivity extends AppCompatActivity implements SensorEventLis
         img_view.setVisibility(View.INVISIBLE);
         saveBtn.setVisibility(View.INVISIBLE);
         Bitmap captureView = Utils.takeScreenShot(this);
-        savePicture(captureView, new SimpleDateFormat("yyMMddHHmmss").format(new Date()) + ".jpg");
+        savePicture(captureView, new SimpleDateFormat("yyMMddHHmmss").format(new Date())+"Pictures" + ".jpg");
         Toast.makeText(getApplicationContext(), "Saved your sketch!", Toast.LENGTH_SHORT).show();
         img_view.setVisibility(View.VISIBLE);
         saveBtn.setVisibility(View.VISIBLE);
@@ -321,5 +321,3 @@ public class GravityActivity extends AppCompatActivity implements SensorEventLis
     }
 
 }
-
-

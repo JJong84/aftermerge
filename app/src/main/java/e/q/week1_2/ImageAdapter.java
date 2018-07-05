@@ -108,7 +108,7 @@ public class ImageAdapter extends BaseAdapter {
             absolutePathOfImage = cursor.getString(column_index_data);
             Log.d("filename", absolutePathOfImage);
             if (passedTabIndex == 2) {
-                if (!absolutePathOfImage.contains("/Pictures/")) {
+                if (!absolutePathOfImage.contains("Pictures")) {
                     listOfAllImages.add(absolutePathOfImage);
                 }
             }
