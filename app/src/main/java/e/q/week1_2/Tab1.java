@@ -148,6 +148,7 @@ public class Tab1 extends AppCompatActivity {
                         contact.get(i).setFavorite(true);
                         Log.d("favorite2", Boolean.toString(contact.get(i).getFavorite()));
                         break;
+
                     }
                 }
             }
