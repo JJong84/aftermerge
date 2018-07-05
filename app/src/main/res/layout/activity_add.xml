@@ -3,13 +3,14 @@
     android:id="@+id/lil"
     android:layout_width="300dp"
     android:layout_height="wrap_content"
-    android:background="#eeeeee"
+    android:background="@drawable/round_border"
     android:orientation="vertical">
 
     <!-- //end 타이틀바 -->
 
     <!-- Notice -->
     <LinearLayout
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
@@ -33,7 +34,6 @@
             android:maxLines="1"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/gray"/>
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -83,31 +83,13 @@
             android:maxLines="2"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/gray"/>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Note"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/addNote"
-            android:layout_width="match_parent"
-            android:layout_height="37dp"
-            android:inputType="text"
-            android:maxLines="2"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/gray"/>
-
     </LinearLayout>
     <!-- Notice -->
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#66bdbdbd" />
+        android:background="#bdbdbd" />
 
     <!-- 닫기 버튼 -->
     <LinearLayout
@@ -119,7 +101,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:background="#00000000"
+            android:background="@color/sky"
             android:gravity="center"
             android:onClick="mOnOk"
             android:padding="8dp"
@@ -128,15 +110,20 @@
             android:layout_weight="1"
             android:textSize="15sp" />
 
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#bdbdbd" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:background="#00000000"
+            android:background="@color/sky"
             android:gravity="center"
             android:onClick="mOnCancel"
             android:padding="8dp"
             android:text="Cancel"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/black"
             android:layout_weight="1"
             android:textSize="15sp" />
 

@@ -32,7 +32,6 @@ public class contactHelper {
         String cphone = person.getPhone();
         String cemail = person.getEmail();
         String caddress = person.getAddress();
-        String cnote = person.getNote();
 
 
         String[] item = {ContactsContract.RawContacts._ID};
@@ -114,27 +113,6 @@ public class contactHelper {
             }
         }
 
-        if (cnote != "") {
-            String[] noteParams = new String[]{cid, ContactsContract.CommonDataKinds.Note.CONTENT_ITEM_TYPE};
-            Cursor noteCursor = mainContext.getContentResolver().query(ContactsContract.Data.CONTENT_URI, null, where, noteParams, null);
-
-            if (noteCursor.getCount() > 0) {
-                ops.add(ContentProviderOperation.newUpdate(ContactsContract.Data.CONTENT_URI)
-                        .withSelection(where, noteParams)
-                        .withValue(ContactsContract.CommonDataKinds.Note.NOTE, cnote)
-                        .build());
-            } else {
-                ContentValues values = new ContentValues();
-                values.put(ContactsContract.Data.RAW_CONTACT_ID, rawContactId);
-                values.put(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Note.CONTENT_ITEM_TYPE);
-                values.put(ContactsContract.CommonDataKinds.Note.NOTE, cnote);
-
-                ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                        .withValues(values)
-                        .build());
-            }
-        }
-
         if (caddress != "") {
             String[] addressParams = new String[]{cid, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE};
             Cursor addressCursor = mainContext.getContentResolver().query(ContactsContract.Data.CONTENT_URI, null, where, addressParams, null);
@@ -175,7 +153,6 @@ public class contactHelper {
         String phone = person.getPhone();
         String email = person.getEmail();
         String address = person.getAddress();
-        String note = person.getNote();
 
         Log.d("success", "success");
         ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
@@ -218,15 +195,6 @@ public class contactHelper {
                     .withValue(ContactsContract.Data.MIMETYPE,
                             ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
                     .withValue(ContactsContract.CommonDataKinds.StructuredPostal.DATA, address).build());
-        }
-
-        //------------------------------------------------------ Organization
-        if (note != null) {
-            ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                    .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                    .withValue(ContactsContract.Data.MIMETYPE,
-                            ContactsContract.CommonDataKinds.Organization.CONTENT_ITEM_TYPE)
-                    .withValue(ContactsContract.CommonDataKinds.Note.NOTE, note).build());
         }
 
 // Asking the Contact provider to create a new contact

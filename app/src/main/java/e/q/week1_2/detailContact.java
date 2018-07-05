@@ -19,6 +19,7 @@ import android.provider.ContactsContract;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
@@ -26,6 +27,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,7 +62,6 @@ public class detailContact extends Activity {
         ImageView photoView = findViewById(R.id.photoView);
         final TextView emailView = findViewById(R.id.emailView);
         TextView addressView = findViewById(R.id.addressView);
-        TextView noteView = findViewById(R.id.noteView);
 
         Button favorite = findViewById(R.id.favorite);
         ImageButton call = findViewById(R.id.call);
@@ -71,7 +72,6 @@ public class detailContact extends Activity {
         phoneView.setText(parsePhone.parse(person.getPhone()));
         emailView.setText(person.getEmail());
         addressView.setText(person.getAddress());
-        noteView.setText(person.getNote());
 
         if (person.getFavorite() == null) {
             person.setFavorite(false);
@@ -154,14 +154,12 @@ public class detailContact extends Activity {
         TextView phoneView = findViewById(R.id.phoneView);
         TextView emailView = findViewById(R.id.emailView);
         TextView addressView = findViewById(R.id.addressView);
-        TextView noteView = findViewById(R.id.noteView);
 
         Log.d("namveview1", nameView.getText().toString());
         changed.setName(nameView.getText().toString());
         changed.setPhone(phoneView.getText().toString());
         changed.setEmail(emailView.getText().toString());
         changed.setAddress(addressView.getText().toString());
-        changed.setNote(noteView.getText().toString());
 
         changed.setFavorite(person.getFavorite());
         //contactHelper.edit(changed, this);
@@ -187,21 +185,18 @@ public class detailContact extends Activity {
         TextView phoneView = findViewById(R.id.phoneView);
         TextView emailView = findViewById(R.id.emailView);
         TextView addressView = findViewById(R.id.addressView);
-        TextView noteView = findViewById(R.id.noteView);
 
         EditText nameEdit = findViewById(R.id.nameEdit);
         EditText phoneEdit = findViewById(R.id.phoneEdit);
         EditText emailEdit = findViewById(R.id.emailEdit);
         EditText addressEdit = findViewById(R.id.addressEdit);
-        EditText noteEdit = findViewById(R.id.noteEdit);
 
         ImageButton call = findViewById(R.id.call);
         ImageButton mail = findViewById(R.id.mail);
         ImageButton back = findViewById(R.id.back);
         ImageButton cancel = findViewById(R.id.cancel);
-        Button favorite = findViewById(R.id.favorite);
-        Button delete = findViewById(R.id.delete);
         ImageButton edits = findViewById(R.id.edits);
+        LinearLayout buttons = findViewById(R.id.buttons);
 
         //edit mode off
         if (edit == true) {
@@ -212,7 +207,6 @@ public class detailContact extends Activity {
             phoneEdit.setVisibility(View.GONE);
             emailEdit.setVisibility(View.GONE);
             addressEdit.setVisibility(View.GONE);
-            noteEdit.setVisibility(View.GONE);
 
             nameView.setVisibility(View.VISIBLE);
             nameView.setText(nameEdit.getText().toString());
@@ -226,14 +220,10 @@ public class detailContact extends Activity {
             addressView.setVisibility(View.VISIBLE);
             addressView.setText(addressEdit.getText().toString());
 
-            noteView.setVisibility(View.VISIBLE);
-            noteView.setText(noteEdit.getText().toString());
-
             call.setVisibility(View.VISIBLE);
             mail.setVisibility(View.VISIBLE);
-            delete.setVisibility(View.VISIBLE);
             back.setVisibility(View.VISIBLE);
-            favorite.setVisibility(View.VISIBLE);
+            buttons.setVisibility(View.VISIBLE);
 
             edits.setImageResource(R.drawable.pencil);
 
@@ -252,7 +242,6 @@ public class detailContact extends Activity {
         phoneView.setVisibility(View.GONE);
         emailView.setVisibility(View.GONE);
         addressView.setVisibility(View.GONE);
-        noteView.setVisibility(View.GONE);
 
         nameEdit.setVisibility(View.VISIBLE);
         nameEdit.setText(nameView.getText().toString());
@@ -266,14 +255,10 @@ public class detailContact extends Activity {
         addressEdit.setVisibility(View.VISIBLE);
         addressEdit.setText(addressView.getText().toString());
 
-        noteEdit.setVisibility(View.VISIBLE);
-        noteEdit.setText(noteView.getText().toString());
-
         call.setVisibility(View.GONE);
         mail.setVisibility(View.GONE);
-        delete.setVisibility(View.GONE);
         back.setVisibility(View.GONE);
-        favorite.setVisibility(View.GONE);
+        buttons.setVisibility(View.GONE);
 
         edits.setImageResource(R.drawable.check);
 
@@ -303,20 +288,18 @@ public class detailContact extends Activity {
         TextView phoneView = findViewById(R.id.phoneView);
         TextView emailView = findViewById(R.id.emailView);
         TextView addressView = findViewById(R.id.addressView);
-        TextView noteView = findViewById(R.id.noteView);
 
         EditText nameEdit = findViewById(R.id.nameEdit);
         EditText phoneEdit = findViewById(R.id.phoneEdit);
         EditText emailEdit = findViewById(R.id.emailEdit);
         EditText addressEdit = findViewById(R.id.addressEdit);
-        EditText noteEdit = findViewById(R.id.noteEdit);
 
         ImageButton call = findViewById(R.id.call);
         ImageButton mail = findViewById(R.id.mail);
         ImageButton back = findViewById(R.id.back);
         ImageButton cancel = findViewById(R.id.cancel);
-        Button favorite = findViewById(R.id.favorite);
-        Button delete = findViewById(R.id.delete);
+        LinearLayout buttons = findViewById(R.id.buttons);
+
 
         //edit mode off
         edit = false;
@@ -326,7 +309,6 @@ public class detailContact extends Activity {
         phoneEdit.setVisibility(View.GONE);
         emailEdit.setVisibility(View.GONE);
         addressEdit.setVisibility(View.GONE);
-        noteEdit.setVisibility(View.GONE);
 
         nameView.setVisibility(View.VISIBLE);
         nameEdit.setText(nameView.getText().toString());
@@ -340,14 +322,10 @@ public class detailContact extends Activity {
         addressView.setVisibility(View.VISIBLE);
         addressEdit.setText(addressView.getText().toString());
 
-        noteView.setVisibility(View.VISIBLE);
-        noteEdit.setText(noteView.getText().toString());
-
         call.setVisibility(View.VISIBLE);
         mail.setVisibility(View.VISIBLE);
-        delete.setVisibility(View.VISIBLE);
         back.setVisibility(View.VISIBLE);
-        favorite.setVisibility(View.VISIBLE);
+        buttons.setVisibility(View.VISIBLE);
 
         hideKeyboard();
 
@@ -384,12 +362,10 @@ public class detailContact extends Activity {
         EditText phoneEdit = findViewById(R.id.phoneEdit);
         EditText emailEdit = findViewById(R.id.emailEdit);
         EditText addressEdit = findViewById(R.id.addressEdit);
-        EditText noteEdit = findViewById(R.id.noteEdit);
 
         imm.hideSoftInputFromWindow(nameEdit.getWindowToken(), 0);
         imm.hideSoftInputFromWindow(phoneEdit.getWindowToken(), 0);
         imm.hideSoftInputFromWindow(emailEdit.getWindowToken(), 0);
         imm.hideSoftInputFromWindow(addressEdit.getWindowToken(), 0);
-        imm.hideSoftInputFromWindow(noteEdit.getWindowToken(), 0);
     }
 }

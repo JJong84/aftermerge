@@ -55,11 +55,18 @@ public class Tab1 extends AppCompatActivity {
 
     private String info;
     private ListView lv;
+    private ListView fav_lv;
     private ListViewAdapter ca = null;
+    private ListViewAdapter cb = null;
     private ArrayList<Person> contact;
+    private ArrayList<Person> fav_con;
+    private ArrayList<Person> not_con;
     private List<Person> result;
+    private List<Person> fav_res;
+    private List<Person> not_res;
     private EditText searchText;
     private FloatingActionButton add;
+    private TextView showFavorite;
     File file;
 
     @Override
@@ -70,6 +77,8 @@ public class Tab1 extends AppCompatActivity {
 
         searchText = findViewById(R.id.searchText);
         lv = findViewById(R.id.lv);
+        fav_lv = findViewById(R.id.lv_favorite);
+
         result = new ArrayList<Person>();
         getContact();
 
@@ -78,10 +87,28 @@ public class Tab1 extends AppCompatActivity {
 
         //merge();
         //parser();
+        fav_res = new ArrayList<Person>();
+        not_res = new ArrayList<Person>();
 
-        Collections.sort(result, myComparator);
-        ca = new ListViewAdapter(result, this);
-        lv.setAdapter(ca);
+        for(int i=0; i<contact.size(); i++){
+            if(contact.get(i).getFavorite()){
+                fav_res.add(contact.get(i));
+            }
+            else{
+                not_res.add(contact.get(i));
+            }
+        }
+
+        fav_con = new ArrayList<Person>();
+        fav_con.addAll(fav_res);
+        not_con = new ArrayList<Person>();
+        not_con.addAll(not_res);
+
+        ca = new ListViewAdapter(fav_res, this);
+        fav_lv.setAdapter(ca);
+
+        cb = new ListViewAdapter(not_res, this);
+        lv.setAdapter(cb);
 
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -114,7 +141,18 @@ public class Tab1 extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(Tab1.this, detailContact.class);
-                intent.putExtra("contact", result.get(i));
+                intent.putExtra("contact", not_res.get(i));
+                startActivityForResult(intent, 1);
+            }
+        });
+
+        //click
+        fav_lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(Tab1.this, detailContact.class);
+                intent.putExtra("contact", fav_res.get(i));
                 startActivityForResult(intent, 1);
             }
         });
@@ -124,10 +162,14 @@ public class Tab1 extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         result = new ArrayList<Person>();
+        fav_res = new ArrayList<Person>();
+        not_res = new ArrayList<Person>();
 
         getContact();
 
         contact = new ArrayList<Person>();
+        fav_con = new ArrayList<Person>();
+        not_con = new ArrayList<Person>();
         contact.addAll(result);
 
         //favorite
@@ -150,11 +192,28 @@ public class Tab1 extends AppCompatActivity {
             }
         }
 
+        for(int i=0; i<contact.size(); i++){
+            if(contact.get(i).getFavorite()){
+                fav_res.add(contact.get(i));
+            }
+            else{
+                not_res.add(contact.get(i));
+            }
+        }
+
+        fav_con = new ArrayList<Person>();
+        fav_con.addAll(fav_res);
+        not_con = new ArrayList<Person>();
+        not_con.addAll(not_res);
+
+        ca = new ListViewAdapter(fav_res, this);
+        fav_lv.setAdapter(ca);
+
+        cb = new ListViewAdapter(not_res, this);
+        lv.setAdapter(cb);
+
         //merge();
         //parser();
-        Collections.sort(result, myComparator);
-        ca = new ListViewAdapter(result, this);
-        lv.setAdapter(ca);
 
         searchText.addTextChangedListener(new
 
@@ -193,8 +252,19 @@ public class Tab1 extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(Tab1.this, detailContact.class);
-                intent.putExtra("contact", result.get(i));
+                intent.putExtra("contact", not_res.get(i));
                 startActivityForResult(intent, 0);
+            }
+        });
+
+        //click
+        fav_lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(Tab1.this, detailContact.class);
+                intent.putExtra("contact", fav_res.get(i));
+                startActivityForResult(intent, 1);
             }
         });
     }
@@ -325,9 +395,7 @@ public class Tab1 extends AppCompatActivity {
             try {
                 FileInputStream fis = openFileInput(person.getName() + ".txt");
                 byte[] data = new byte[fis.available()];
-                while (fis.read(data) != -1) {
-                    ;
-                }
+                while (fis.read(data) != -1) { ; }
                 fis.close();
                 String bool = new String(data);
                 if (bool.equals("true")) {
@@ -335,9 +403,7 @@ public class Tab1 extends AppCompatActivity {
                 } else {
                     person.setFavorite(false);
                 }
-            } catch (Exception e) {
-                ;
-            }
+            } catch (Exception e) { ; }
         }
         mainCursor.close();
 
@@ -398,7 +464,7 @@ public class Tab1 extends AppCompatActivity {
             if (data.getFavorite() == null) {
                 holder.star.setVisibility(View.GONE);
             } else {
-                if (data.getFavorite() == true) {
+                if (data.getFavorite()) {
                     holder.star.setVisibility(View.VISIBLE);
                 } else {
                     holder.star.setVisibility(View.GONE);
@@ -452,38 +518,29 @@ public class Tab1 extends AppCompatActivity {
 
     public void search(String text) {
         Log.d("recieve", text);
-        result.clear();
+        fav_res.clear();
+        not_res.clear();
 
         if (text.length() == 0) {
             Log.d("route1", "route1");
-            result.addAll(contact);
+            fav_res.addAll(fav_con);
+            not_res.addAll(not_con);
         } else {
             for (int i = 0; i < contact.size(); i++) {
                 Person person = contact.get(i);
                 if ((person.getName().toLowerCase().contains(text)) || SoundSearcher.matchString(person.getName(), text) || (person.getPhone().contains(text)) || (person.getEmail().contains(text))) {
-                    result.add(person);
+                    if(person.getFavorite()) {
+                        fav_res.add(person);
+                    } else {
+                        not_res.add(person);
+                    }
                 }
             }
         }
 
         ca.notifyDataSetChanged();
+        cb.notifyDataSetChanged();
     }
-
-
-    //Comparator 를 만든다.
-    Comparator<Person> myComparator = new Comparator<Person>() {
-
-        @Override
-        public int compare(Person object1, Person object2) {
-            if (object1.getFavorite() == object2.getFavorite()) {
-                return 0;
-            } else if (object1.getFavorite() == true) {
-                return -1;
-            } else {
-                return 1;
-            }
-        }
-    };
 
     /**
      //merge to string

@@ -10,62 +10,61 @@ public class Person implements Serializable {
     private long photo_id = 0;
     private String address = "";
     private Boolean favorite = false;
-    private String note = "";
 
-    public String getId(){
+    public String getId() {
         return id;
     }
-    public void setId(String id){
+
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
-    public void setName(String name){
+
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getEmail(){
+    public String getEmail() {
         return email;
     }
-    public void setEmail(String email){
+
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getPhone(){
+    public String getPhone() {
         return phone;
     }
-    public void setPhone(String phone){
+
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public long getPhoto_id(){
+    public long getPhoto_id() {
         return photo_id;
     }
-    public void setPhoto_id(long photo_id){
+
+    public void setPhoto_id(long photo_id) {
         this.photo_id = photo_id;
     }
 
-    public String getAddress(){
+    public String getAddress() {
         return address;
     }
-    public void setAddress(String address){
+
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    public Boolean getFavorite(){
+    public Boolean getFavorite() {
         return favorite;
     }
-    public void setFavorite(Boolean favorite){
-        this.favorite = favorite;
-    }
 
-    public String getNote(){
-        return note;
-    }
-    public void setNote(String note){
-        this.note = note;
+    public void setFavorite(Boolean favorite) {
+        this.favorite = favorite;
     }
 
     //instant message

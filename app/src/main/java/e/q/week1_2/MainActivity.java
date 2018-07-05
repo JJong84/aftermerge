@@ -37,8 +37,6 @@ public class MainActivity extends TabActivity {
         else {
             doOncreate();
         }
-
-
     }
 
     @Override
@@ -62,21 +60,30 @@ public class MainActivity extends TabActivity {
 
 
     public void doOncreate() {
-        TabHost mTab = getTabHost();
+        final TabHost mTab = getTabHost();
         TabHost.TabSpec spec;
         Intent intent;
 
         intent = new Intent(this, Tab1.class);
-        spec = mTab.newTabSpec("Contact").setIndicator("Contact").setContent(intent);
+        spec = mTab.newTabSpec("Contact").setIndicator("", getResources().getDrawable(R.drawable.contactphone)).setContent(intent);
         mTab.addTab(spec);
 
         intent = new Intent(this, Tab2.class);
-        spec = mTab.newTabSpec("Gallery").setIndicator("Gallery").setContent(intent);
+        spec = mTab.newTabSpec("Gallery").setIndicator("", getResources().getDrawable(R.drawable.gallery)).setContent(intent);
         mTab.addTab(spec);
 
         intent = new Intent(this, Tab3.class);
-        spec = mTab.newTabSpec("tab3").setIndicator("Tab 3").setContent(intent);
+        spec = mTab.newTabSpec("tab3").setIndicator("", getResources().getDrawable(R.drawable.paint)).setContent(intent);
         mTab.addTab(spec);
+
+        setTabColor(mTab);
+        mTab.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+
+            @Override
+            public void onTabChanged(String arg0) {
+                setTabColor(mTab);
+            }
+        });
     }
 
     public static boolean hasPermissions(Context context, String... permissions){
@@ -88,5 +95,20 @@ public class MainActivity extends TabActivity {
             }
         }
         return true;
+    }
+
+    public static void setTabColor(TabHost tabhost) {
+
+        for (int i = 0; i < tabhost.getTabWidget().getChildCount(); i++) {
+            tabhost.getTabWidget().getChildAt(i)
+                    .setBackgroundResource(R.drawable.round_tab); // unselected
+            tabhost.getTabWidget().setStripEnabled(false);
+        }
+        tabhost.getTabWidget().setCurrentTab(0);
+        tabhost.getTabWidget().getChildAt(tabhost.getCurrentTab())
+                .setBackgroundResource(R.drawable.round_tab_white); // selected
+        // //have
+        // to
+        // change
     }
 }

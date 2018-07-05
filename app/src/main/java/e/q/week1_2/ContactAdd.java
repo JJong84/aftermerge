@@ -53,7 +53,6 @@ public class ContactAdd extends Activity {
         EditText addPhone = findViewById(R.id.addPhone);
         EditText addEmail = findViewById(R.id.addEmail);
         EditText addad = findViewById(R.id.addad);
-        EditText addNote = findViewById(R.id.addNote);
 
         if(addName.getText() == null){
             Toast.makeText(getApplicationContext(), "Please fill the name.", Toast.LENGTH_SHORT).show();
@@ -66,7 +65,6 @@ public class ContactAdd extends Activity {
         add.setPhone(addPhone.getText().toString());
         add.setEmail(addEmail.getText().toString());
         add.setAddress(addad.getText().toString());
-        add.setNote(addNote.getText().toString());
 
         hideKeyboard();
 
@@ -87,12 +85,10 @@ public class ContactAdd extends Activity {
         EditText addPhone = findViewById(R.id.addPhone);
         EditText addEmail = findViewById(R.id.addEmail);
         EditText addad = findViewById(R.id.addad);
-        EditText addNote = findViewById(R.id.addNote);
 
         imm.hideSoftInputFromWindow(addName.getWindowToken(), 0);
         imm.hideSoftInputFromWindow(addPhone.getWindowToken(), 0);
         imm.hideSoftInputFromWindow(addEmail.getWindowToken(), 0);
         imm.hideSoftInputFromWindow(addad.getWindowToken(), 0);
-        imm.hideSoftInputFromWindow(addNote.getWindowToken(), 0);
     }
 }
