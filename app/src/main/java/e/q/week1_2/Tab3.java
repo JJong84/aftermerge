@@ -37,6 +37,7 @@ public class Tab3 extends Activity {
     public int FOR_LISTVIEW = 1;
 
     private Button startBtn;
+    private Button gravityStartBtn;
     private GridView sketches;
     private ImageAdapter gridAdapter;
     private ImageDialog imgDialog;
@@ -55,11 +56,19 @@ public class Tab3 extends Activity {
         deviceSize[0] = dm.widthPixels;
         deviceSize[1] = dm.heightPixels;
 
-        startBtn = findViewById(R.id.start_button);
+        startBtn = findViewById(R.id.paint_start_button);
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(Tab3.this, MoveActivity.class);
+                startActivity(intent);
+            }
+        });
+        gravityStartBtn = findViewById(R.id.gravity_start_button);
+        gravityStartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Tab3.this, GravityActivity.class);
                 startActivity(intent);
             }
         });

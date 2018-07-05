@@ -10,13 +10,14 @@ import android.widget.ImageView;
 
 public class ImageDialog extends Dialog {
     Button closeBtn;
-    Button deleteBtn;
+    //Button deleteBtn;
     ImageView fullImgView;
 
     public ImageDialog(Context context, int[] deviceSize) {
         super(context);
         setContentView(R.layout.image_dialog);
         closeBtn = findViewById(R.id.close_button);
+        //deleteBtn = findViewById(R.id.delete_button);
         fullImgView = findViewById(R.id.full_imageview);
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override

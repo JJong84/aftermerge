@@ -27,9 +27,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -45,15 +47,16 @@ public class Tab2 extends Activity implements SensorEventListener{
 
     private SensorManager mSensorManager;
     private Sensor mRotSensor, mAccelSensor;
+    private ImageButton fullBtn;
 
     private GridView gallery;
     private ListView listGallery;
     private ImageAdapter gridAdapter, listAdapter;
-    private Button camBtn, fullBtn, shareBtn;
+    //private Button camBtn, fullBtn, shareBtn;
     private ImageDialog imgDialog;
     private Uri fileUri;
 
-    private int selectedPosition = -1;
+    private int selectedPosition = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,26 +76,6 @@ public class Tab2 extends Activity implements SensorEventListener{
         mRotSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
         mAccelSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
 
-        //set buttons
-        camBtn = (Button) findViewById(R.id.camButton);
-        shareBtn = (Button) findViewById(R.id.shareButton);
-
-
-        camBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                // 아래 정의한 capture한 사진의 저장 method를 실행 한 후
-                fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
-                // 먼저 선언한 intent에 해당 file 명의 값을 추가로 저장한다.
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
-
-                // start the image capture Intent
-                // 해당 intent를 시작한다.
-                startActivityForResult(intent, 1);
-            }
-        });
-
     }
 
     public void setViewsListeners() {
@@ -103,8 +86,8 @@ public class Tab2 extends Activity implements SensorEventListener{
 
         listGallery = (ListView) findViewById(R.id.galleryListView);
 
-        int width = (int) (deviceSize[0] * 0.7);
-        ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(width, width * 4 / 3);
+        int width = (int) (deviceSize[0] * 0.9);
+        ViewGroup.LayoutParams params = new RelativeLayout.LayoutParams(width, width);
         listGallery.setLayoutParams(params);
         listAdapter = new ImageAdapter(this, FOR_LISTVIEW, 2);
         listGallery.setAdapter(listAdapter);
@@ -121,7 +104,7 @@ public class Tab2 extends Activity implements SensorEventListener{
 
         imgDialog = new ImageDialog(this, deviceSize);
 
-        fullBtn = (Button) findViewById(R.id.fullViewButton);
+        fullBtn = (ImageButton) findViewById(R.id.full_view_button);
         fullBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -146,7 +129,7 @@ public class Tab2 extends Activity implements SensorEventListener{
                 Log.d("scroll by pitch", "go down");
                 listGallery.smoothScrollBy(1000, 400);
             }
-            else if (pitchDeg < -40) {
+            else if (pitchDeg < -50) {
                 Log.d("scroll by pitch", "go up");
                 listGallery.smoothScrollBy(-1000, 400);
             }
@@ -179,44 +162,4 @@ public class Tab2 extends Activity implements SensorEventListener{
             adapter.setImageView(fullImgView, selectedPosition);
         }
     }
-
-    //for camera
-
-    private static Uri getOutputMediaFileUri(int type){
-        return Uri.fromFile(getOutputMediaFile(type));
-    }
-
-    private static File getOutputMediaFile(int type){
-        // To be safe, you should check that the SDCard is mounted
-        // using Environment.getExternalStorageState() before doing this.
-
-        // 외부 저장소에 이 App을 통해 촬영된 사진만 저장할 directory 경로와 File을 연결
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "MyCameraApp");
-        // This location works best if you want the created images to be shared
-        // between applications and persist after your app has been uninstalled.
-
-        // Create the storage directory if it does not exist
-        if (! mediaStorageDir.exists()){ // 해당 directory가 아직 생성되지 않았을 경우 mkdirs(). 즉 directory를 생성한다.
-            if (! mediaStorageDir.mkdirs()){ // 만약 mkdirs()가 제대로 동작하지 않을 경우, 오류 Log를 출력한 뒤, 해당 method 종료
-                Log.d("MyCameraApp", "failed to create directory");
-                return null;
-            }
-        }
-
-        // Create a media file name
-        // File 명으로 file의 생성 시간을 활용하도록 DateFormat 기능을 활용
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        File mediaFile;
-
-        if (type == MEDIA_TYPE_IMAGE){
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-                    "IMG_"+ timeStamp + ".jpg");
-        } else {
-            return null;
-        }
-        return mediaFile; // 생성된 File valuable을 반환
-    }
-
-
 }

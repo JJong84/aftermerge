@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
-<RelativeLayout
-    android:orientation="vertical"
+<RelativeLayout android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#FFF">
+    android:background="#CEECF5"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:orientation="horizontal"
         android:id="@+id/draw_linear"
@@ -19,7 +19,7 @@
         android:layout_gravity="center"
         android:layout_centerInParent="true"
         android:gravity="center_horizontal|center_vertical"
-        android:src="@drawable/ic_circle_red_24dp"/>
+        android:src="@drawable/ic_lens_blue_24dp"/>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/save_button"
         android:layout_width="wrap_content"
@@ -27,5 +27,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:src="@drawable/ic_save_white_24dp"
+        app:backgroundTint="#455496"
         android:layout_margin="20dp"/>
 </RelativeLayout>

@@ -13,9 +13,6 @@
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-        android:layout_marginLeft="5dp"
-        android:layout_marginStart="5dp"
         android:orientation="vertical">
 
         <TextView
@@ -104,9 +101,8 @@
             android:background="@color/sky"
             android:gravity="center"
             android:onClick="mOnOk"
-            android:padding="8dp"
             android:text="@string/Ok"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/black"
             android:layout_weight="1"
             android:textSize="15sp" />
 
@@ -121,7 +117,6 @@
             android:background="@color/sky"
             android:gravity="center"
             android:onClick="mOnCancel"
-            android:padding="8dp"
             android:text="Cancel"
             android:textColor="@color/black"
             android:layout_weight="1"

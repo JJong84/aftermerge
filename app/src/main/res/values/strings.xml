@@ -1,7 +1,7 @@
 <resources>
     <string name="rf">Remove from favorites...</string>
     <string name="af">Add to favorites...</string>
-    <string name="app_name">week1_2</string>
+    <string name="app_name">Gravity Painter</string>
     <string name="defaults">defaults</string>
     <string name="Ok">Ok</string>
     <string name="permission_denied">You have denied permissions,\nso the app cannot start.\nPlease restart app and allow permissions.</string>

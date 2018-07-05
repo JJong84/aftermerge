@@ -13,6 +13,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 
@@ -71,8 +72,8 @@ public class ImageAdapter extends BaseAdapter {
         } else {
             com.bumptech.glide.DrawableTypeRequest glideRequest = Glide.with(context).load(images.get(position));
             glideRequest.centerCrop().into(picturesView);
-            int width = (int) (deviceSize[0] * 0.7);
-            ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(width, width * 4 / 3);
+            int width = (int) (deviceSize[0] * 0.9);
+            ViewGroup.LayoutParams params = new RelativeLayout.LayoutParams(width, width);
             picturesView.setLayoutParams(params);
         }
         return picturesView;

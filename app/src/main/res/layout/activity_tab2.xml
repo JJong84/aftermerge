@@ -1,8 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
     <GridView
         android:id="@+id/galleryGridView"
         android:layout_width="match_parent"
@@ -15,11 +18,21 @@
         android:stretchMode="columnWidth"
         android:verticalSpacing="10dp" >
     </GridView>
-    <LinearLayout
+    <RelativeLayout
+
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/full_view_button"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_zoom_in_black_24dp"
+            android:layout_margin="10dp"
+            app:backgroundTint="#CEECF5"/>
         <ListView
             android:id="@+id/galleryListView"
             android:verticalSpacing="10dp"
@@ -28,23 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-            <Button
-                android:id="@+id/fullViewButton"
-                android:text="FULL VIEW"
-                style="@style/tap2Button"/>
-            <Button
-                android:id="@+id/camButton"
-                android:text="TAKE NEW"
-                style="@style/tap2Button"/>
-            <Button
-                android:id="@+id/shareButton"
-                android:text="DELETE"
-                style="@style/tap2Button"/>
-        </LinearLayout>
-    </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

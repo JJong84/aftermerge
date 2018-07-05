@@ -2,16 +2,26 @@
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="#FFFFFF" >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:weightSum="2">
         <Button
-            android:id="@+id/start_button"
+            android:id="@+id/paint_start_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="START\nPLAY"/>
+            android:text="Paint Mode"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/gravity_start_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reality Mode"
+            android:layout_weight="1"/>
     </LinearLayout>
 
     <GridView
@@ -22,8 +32,8 @@
         android:gravity="center"
         android:horizontalSpacing="10dp"
         android:numColumns="3"
-        android:padding="2dp"
+        android:padding="10dp"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="2dp" >
+        android:verticalSpacing="10dp" >
     </GridView>
 </LinearLayout>
