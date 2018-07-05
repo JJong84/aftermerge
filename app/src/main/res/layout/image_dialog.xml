@@ -5,12 +5,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#FFF">
-    <Button
-        android:id="@+id/close_button"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="CLOSE"/>
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/close_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="CLOSE"/>
+    </LinearLayout>
     <ImageView
         android:id="@+id/full_imageview"
         android:layout_width="match_parent"

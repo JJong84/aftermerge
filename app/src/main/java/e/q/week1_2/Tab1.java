@@ -132,7 +132,6 @@ public class Tab1 extends AppCompatActivity {
 
         //favorite
         if (resultCode == 1)
-
         {
             String name = data.getStringExtra("name");
             Boolean favorite = data.getBooleanExtra("favorite", false);

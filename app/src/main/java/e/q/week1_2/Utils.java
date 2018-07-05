@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import android.util.Log;
 import android.view.View;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -27,7 +28,6 @@ public class Utils {
         view.destroyDrawingCache();
         return b;
     }
-
 
 
     public static void savePic(Bitmap b, String strFileName) {

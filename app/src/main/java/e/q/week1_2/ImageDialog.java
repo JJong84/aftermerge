@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 public class ImageDialog extends Dialog {
     Button closeBtn;
+    Button deleteBtn;
     ImageView fullImgView;
 
     public ImageDialog(Context context, int[] deviceSize) {
@@ -30,6 +31,12 @@ public class ImageDialog extends Dialog {
         wm.width = (int) (deviceSize[0] * 0.95);
         wm.height = (int) (deviceSize[1] * 0.95);
     }
+
+    public void performDelete(String path) {
+
+    }
+
+
 
     public ImageView getFullImgView() {
         return fullImgView;

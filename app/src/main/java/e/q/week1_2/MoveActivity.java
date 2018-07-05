@@ -64,7 +64,7 @@ public class MoveActivity extends AppCompatActivity implements SensorEventListen
     private Path path;
     int color = Color.BLACK;
 
-    private String dirName = "/tab3_sketches";
+    private String dirName = "";
 
     class PaperView extends View {
         public PaperView(Context context) {

@@ -9,21 +9,23 @@
         android:layout_height="220dp"
         android:columnWidth="280dp"
         android:gravity="center"
-        android:horizontalSpacing="2dp"
+        android:horizontalSpacing="10dp"
         android:numColumns="3"
-        android:padding="2dp"
+        android:padding="10dp"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="2dp" >
+        android:verticalSpacing="10dp" >
     </GridView>
     <LinearLayout
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
         <ListView
             android:id="@+id/galleryListView"
+            android:verticalSpacing="10dp"
             android:orientation="horizontal"
-            android:layout_margin="20dp"
-            android:layout_width="220dp"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
         <LinearLayout

@@ -28,6 +28,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -76,13 +77,13 @@ public class Tab2 extends Activity implements SensorEventListener{
         camBtn = (Button) findViewById(R.id.camButton);
         shareBtn = (Button) findViewById(R.id.shareButton);
 
-        /*
+
         camBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 // 아래 정의한 capture한 사진의 저장 method를 실행 한 후
-                        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
+                fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
                 // 먼저 선언한 intent에 해당 file 명의 값을 추가로 저장한다.
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
 
@@ -91,7 +92,7 @@ public class Tab2 extends Activity implements SensorEventListener{
                 startActivityForResult(intent, 1);
             }
         });
-        */
+
     }
 
     public void setViewsListeners() {
@@ -101,6 +102,10 @@ public class Tab2 extends Activity implements SensorEventListener{
         gallery.setAdapter(gridAdapter);
 
         listGallery = (ListView) findViewById(R.id.galleryListView);
+
+        int width = (int) (deviceSize[0] * 0.7);
+        ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(width, width * 4 / 3);
+        listGallery.setLayoutParams(params);
         listAdapter = new ImageAdapter(this, FOR_LISTVIEW, 2);
         listGallery.setAdapter(listAdapter);
 
@@ -137,11 +142,11 @@ public class Tab2 extends Activity implements SensorEventListener{
 
             double pitchDeg = values[1] *180 / Math.PI;
             Log.d("pitch degree", String.valueOf(pitchDeg));
-            if (pitchDeg > 20) {
+            if (pitchDeg > 10) {
                 Log.d("scroll by pitch", "go down");
                 listGallery.smoothScrollBy(1000, 400);
             }
-            else if (pitchDeg < -60) {
+            else if (pitchDeg < -40) {
                 Log.d("scroll by pitch", "go up");
                 listGallery.smoothScrollBy(-1000, 400);
             }
@@ -176,7 +181,7 @@ public class Tab2 extends Activity implements SensorEventListener{
     }
 
     //for camera
-    /*
+
     private static Uri getOutputMediaFileUri(int type){
         return Uri.fromFile(getOutputMediaFile(type));
     }
@@ -212,6 +217,6 @@ public class Tab2 extends Activity implements SensorEventListener{
         }
         return mediaFile; // 생성된 File valuable을 반환
     }
-    */
+
 
 }

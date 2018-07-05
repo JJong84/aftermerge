@@ -16,6 +16,7 @@ import android.widget.ListView;
 
 import com.bumptech.glide.Glide;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class ImageAdapter extends BaseAdapter {
@@ -56,24 +57,23 @@ public class ImageAdapter extends BaseAdapter {
         if (convertView == null) {
             picturesView = new ImageView(context);
             picturesView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            if (purpose == FOR_GRIDVIEW) {
-                picturesView
-                        .setLayoutParams(new GridView.LayoutParams((int) (deviceSize[0] / 3 * 0.8), (int) (deviceSize[0] / 3 * 0.8)));
-            } else {
-                picturesView
-                        .setLayoutParams(new ListView.LayoutParams(700, 1000));
-            }
-
         } else {
             picturesView = (ImageView) convertView;
         }
 
+        Log.d("purpose", String.valueOf(purpose));
+
         if (purpose == FOR_GRIDVIEW) {
             Glide.with(context).load(images.get(position)).centerCrop()
                     .into(picturesView);
+            picturesView
+                    .setLayoutParams(new GridView.LayoutParams((int) (deviceSize[0] / 3 * 0.8), (int) (deviceSize[0] / 3 * 0.8)));
         } else {
-            Glide.with(context).load(images.get(position))
-                    .into(picturesView);
+            com.bumptech.glide.DrawableTypeRequest glideRequest = Glide.with(context).load(images.get(position));
+            glideRequest.centerCrop().into(picturesView);
+            int width = (int) (deviceSize[0] * 0.7);
+            ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(width, width * 4 / 3);
+            picturesView.setLayoutParams(params);
         }
         return picturesView;
     }
@@ -106,7 +106,15 @@ public class ImageAdapter extends BaseAdapter {
         while (cursor.moveToNext()) {
             absolutePathOfImage = cursor.getString(column_index_data);
             Log.d("filename", absolutePathOfImage);
-            listOfAllImages.add(absolutePathOfImage);
+            if (passedTabIndex == 2) {
+                if (!absolutePathOfImage.contains("/Pictures/")) {
+                    listOfAllImages.add(absolutePathOfImage);
+                }
+            }
+            else {
+                listOfAllImages.add(absolutePathOfImage);
+            }
+
         }
         return listOfAllImages;
     }
@@ -116,5 +124,10 @@ public class ImageAdapter extends BaseAdapter {
         Glide.with(context).load(images.get(position))
                 .into(imageView);
         Log.d("dialog debug", "setImageView called");
+    }
+
+    public void deleteImg(int position) {
+        File file = new File(images.get(position));
+        file.delete();
     }
 }
